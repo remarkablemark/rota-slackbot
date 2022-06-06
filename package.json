@@ -12,6 +12,9 @@
     "dotenv": "^8.2.0",
     "mongoose": "^5.12.1"
   },
+  "devDependencies": {
+    "eslint": "^8.17.0"
+  },
   "engines": {
     "node": ">=12"
   },
