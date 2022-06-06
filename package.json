@@ -2,6 +2,7 @@
   "name": "rota-slackbot",
   "version": "0.2.0",
   "description": "Slack rotation management bot",
+  "author": "Kim Maida",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -14,13 +15,5 @@
   "engines": {
     "node": ">=12"
   },
-  "author": "Kim Maida",
-  "repository": {
-    "url": "https://github.com/kmaida/rota-slackbot"
-  },
-  "license": "MIT",
-  "keywords": [
-    "slackapi",
-    "slackbot"
-  ]
+  "license": "MIT"
 }
