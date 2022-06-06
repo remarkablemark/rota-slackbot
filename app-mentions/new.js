@@ -20,13 +20,13 @@ module.exports = async (
 
     if (utils.rotationInList(rotation, ec.rotaList)) {
       // Can't create a rotation that already exists
-      const result = await app.client.chat.postMessage(
+      await app.client.chat.postMessage(
         utils.msgConfig(ec.botToken, ec.channelID, msgText.newError(rotation))
       );
     } else {
       // Initialize a new rotation with description
-      const save = await store.newRotation(rotation, description);
-      const result = await app.client.chat.postMessage(
+      await store.newRotation(rotation, description);
+      await app.client.chat.postMessage(
         utils.msgConfig(ec.botToken, ec.channelID, msgText.newConfirm(rotation))
       );
     }

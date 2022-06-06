@@ -22,7 +22,7 @@ module.exports = async (
       const rotationObj = await store.getRotation(rotation);
       if (rotationObj.assigned) {
         // If someone is currently assigned, report who
-        const result = await app.client.chat.postMessage(
+        await app.client.chat.postMessage(
           utils.msgConfig(
             ec.botToken,
             ec.channelID,
@@ -31,7 +31,7 @@ module.exports = async (
         );
       } else {
         // If nobody is assigned
-        const result = await app.client.chat.postMessage(
+        await app.client.chat.postMessage(
           utils.msgConfig(
             ec.botToken,
             ec.channelID,
@@ -41,7 +41,7 @@ module.exports = async (
       }
     } else {
       // If rotation doesn't exist, send message saying nothing changed
-      const result = await app.client.chat.postMessage(
+      await app.client.chat.postMessage(
         utils.msgConfig(ec.botToken, ec.channelID, msgText.whoError(rotation))
       );
     }

@@ -9,7 +9,8 @@ const app_home_opened = (app) => {
     const userID = event.user;
     const storeList = await store.getRotations();
     try {
-      const showHomeView = await app.client.views.publish({
+      // show home view
+      await app.client.views.publish({
         token: context.botToken,
         user_id: userID,
         view: {

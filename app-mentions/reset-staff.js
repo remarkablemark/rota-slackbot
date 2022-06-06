@@ -19,9 +19,9 @@ module.exports = async (
 
     if (utils.rotationInList(rotation, ec.rotaList)) {
       // If rotation exists, set staff to an empty array
-      const save = await store.saveStaff(rotation, []);
+      await store.saveStaff(rotation, []);
       // Send message to confirm staff has been reset
-      const result = await app.client.chat.postMessage(
+      await app.client.chat.postMessage(
         utils.msgConfig(
           ec.botToken,
           ec.channelID,
@@ -30,7 +30,7 @@ module.exports = async (
       );
     } else {
       // If rotation doesn't exist, send message saying nothing changed
-      const result = await app.client.chat.postMessage(
+      await app.client.chat.postMessage(
         utils.msgConfig(
           ec.botToken,
           ec.channelID,

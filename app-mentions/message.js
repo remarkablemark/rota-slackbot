@@ -28,7 +28,7 @@ module.exports = async (
         }/p${event.ts.replace('.', '')}`;
         const oncallUserDMChannel = utils.getUserID(oncallUser);
         // Send DM to on-call user notifying them of the message that needs their attention
-        const sendDM = await app.client.chat.postMessage(
+        await app.client.chat.postMessage(
           utils.msgConfig(
             ec.botToken,
             oncallUserDMChannel,
@@ -36,7 +36,7 @@ module.exports = async (
           )
         );
         // Send message to the channel where help was requested notifying that assigned user was contacted
-        const sendChannelMsg = await app.client.chat.postMessage(
+        await app.client.chat.postMessage(
           utils.msgConfig(
             ec.botToken,
             ec.channelID,
@@ -46,7 +46,7 @@ module.exports = async (
         if (!!ec.sentByUserID && ec.sentByUserID !== 'USLACKBOT') {
           // Send ephemeral message (only visible to sender) telling them what to do if urgent
           // Do nothing if coming from a slackbot
-          const sendEphemeralMsg = await app.client.chat.postEphemeral(
+          await app.client.chat.postEphemeral(
             utils.msgConfigEph(
               ec.botToken,
               ec.channelID,
@@ -57,7 +57,7 @@ module.exports = async (
         }
       } else {
         // Rotation is not assigned; give instructions how to assign
-        const result = await app.client.chat.postMessage(
+        await app.client.chat.postMessage(
           utils.msgConfig(
             ec.botToken,
             ec.channelID,
@@ -67,7 +67,7 @@ module.exports = async (
       }
     } else {
       // Rotation doesn't exist
-      const result = await app.client.chat.postMessage(
+      await app.client.chat.postMessage(
         utils.msgConfig(ec.botToken, ec.channelID, msgText.msgError(rotation))
       );
     }

@@ -19,8 +19,8 @@ module.exports = async (
 
     if (utils.rotationInList(rotation, ec.rotaList)) {
       // If rotation exists, delete from store completely
-      const del = await store.deleteRotation(rotation);
-      const result = await app.client.chat.postMessage(
+      await store.deleteRotation(rotation);
+      await app.client.chat.postMessage(
         utils.msgConfig(
           ec.botToken,
           ec.channelID,
@@ -29,7 +29,7 @@ module.exports = async (
       );
     } else {
       // If rotation doesn't exist, send message saying nothing changed
-      const result = await app.client.chat.postMessage(
+      await app.client.chat.postMessage(
         utils.msgConfig(
           ec.botToken,
           ec.channelID,

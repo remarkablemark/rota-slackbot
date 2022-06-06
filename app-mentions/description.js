@@ -22,7 +22,7 @@ module.exports = async (
       if (!description.length) {
         // If there is no description, send an error message
         // This is unlikely to happen but possible if the user entered a whitespace and nothing else
-        const result = await app.client.chat.postMessage(
+        await app.client.chat.postMessage(
           utils.msgConfig(
             ec.botToken,
             ec.channelID,
@@ -32,9 +32,9 @@ module.exports = async (
       } else {
         // Rotation exists and description isn't falsey
         // Save to store
-        const save = await store.updateDescription(rotation, description);
+        await store.updateDescription(rotation, description);
         // Confirm in channel with message about updating description
-        const result = await app.client.chat.postMessage(
+        await app.client.chat.postMessage(
           utils.msgConfig(
             ec.botToken,
             ec.channelID,
@@ -44,7 +44,7 @@ module.exports = async (
       }
     } else {
       // Rotation doesn't exist; prompt to create it first
-      const result = await app.client.chat.postMessage(
+      await app.client.chat.postMessage(
         utils.msgConfig(ec.botToken, ec.channelID, msgText.descError(rotation))
       );
     }

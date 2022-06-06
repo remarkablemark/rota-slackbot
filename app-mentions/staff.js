@@ -23,15 +23,15 @@ module.exports = async (
       if (!staff.length) {
         // If staff array is empty, send an error message
         // This is unlikely to happen but possible if there's a really malformed command
-        const result = await app.client.chat.postMessage(
+        await app.client.chat.postMessage(
           utils.msgConfig(ec.botToken, ec.channelID, msgText.staffEmpty())
         );
       } else {
         // Rotation exists and parameter staff list isn't empty
         // Save to store
-        const save = await store.saveStaff(rotation, staff);
+        await store.saveStaff(rotation, staff);
         // Confirm in channel with message about using assign next
-        const result = await app.client.chat.postMessage(
+        await app.client.chat.postMessage(
           utils.msgConfig(
             ec.botToken,
             ec.channelID,
@@ -41,7 +41,7 @@ module.exports = async (
       }
     } else {
       // Rotation doesn't exist; prompt to create it first
-      const result = await app.client.chat.postMessage(
+      await app.client.chat.postMessage(
         utils.msgConfig(ec.botToken, ec.channelID, msgText.staffError(rotation))
       );
     }
