@@ -22,15 +22,15 @@ const errHandler = require('./utils/error');
     APP MENTIONS
 ------------------*/
 const app_mentions = (app, store) => {
-  app.event('app_mention', utils.ignoreMention, async({ event, context }) => {
+  app.event('app_mention', utils.ignoreMention, async ({ event, context }) => {
     // Event and context data
     const ec = {
-      text: event.text,                           // raw text from the mention
-      sentByUserID: event.user,                   // ID of user who sent the message
-      channelID: event.channel,                   // channel ID
-      botToken: context.botToken,                 // bot access token
-      rotaList: await store.getRotations()        // rotations in db
-    }
+      text: event.text, // raw text from the mention
+      sentByUserID: event.user, // ID of user who sent the message
+      channelID: event.channel, // channel ID
+      botToken: context.botToken, // bot access token
+      rotaList: await store.getRotations(), // rotations in db
+    };
     // Decision logic establishing how to respond to mentions
     const isNew = await utils.isCmd('new', ec.text);
     const isDescription = await utils.isCmd('description', ec.text);
@@ -64,7 +64,16 @@ const app_mentions = (app, store) => {
     }
     // @rota "[rotation]" description [new description]
     else if (isDescription) {
-      cmdDescription(app, event, context, ec, utils, store, msgText, errHandler);
+      cmdDescription(
+        app,
+        event,
+        context,
+        ec,
+        utils,
+        store,
+        msgText,
+        errHandler
+      );
     }
     // @rota "[rotation]" staff [@user @user @user]
     else if (isStaff) {
@@ -115,13 +124,16 @@ const app_mentions = (app, store) => {
       try {
         // console.log('Event: ', event, 'Clean Text: ', utils.cleanText(ec.text));
         const result = await app.client.chat.postMessage(
-          utils.msgConfig(ec.botToken, ec.channelID, msgText.didntUnderstand(ec, msgText))
+          utils.msgConfig(
+            ec.botToken,
+            ec.channelID,
+            msgText.didntUnderstand(ec, msgText)
+          )
         );
-      }
-      catch (err) {
+      } catch (err) {
         errHandler(app, ec, utils, err, msgText);
       }
     }
   });
-}
+};
 module.exports = app_mentions;

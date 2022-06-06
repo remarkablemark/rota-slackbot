@@ -4,7 +4,16 @@
   Staffs a rotation by passing a space-separated list of users
   Also allows comma-separated lists; fairly robust against extra spaces/commas
 ------------------*/
-module.exports = async (app, event, context, ec, utils, store, msgText, errHandler) => {
+module.exports = async (
+  app,
+  event,
+  context,
+  ec,
+  utils,
+  store,
+  msgText,
+  errHandler
+) => {
   try {
     const pCmd = await utils.parseCmd('staff', event, context);
     const rotation = pCmd.rotation;
@@ -23,7 +32,11 @@ module.exports = async (app, event, context, ec, utils, store, msgText, errHandl
         const save = await store.saveStaff(rotation, staff);
         // Confirm in channel with message about using assign next
         const result = await app.client.chat.postMessage(
-          utils.msgConfig(ec.botToken, ec.channelID, msgText.staffConfirm(rotation))
+          utils.msgConfig(
+            ec.botToken,
+            ec.channelID,
+            msgText.staffConfirm(rotation)
+          )
         );
       }
     } else {
@@ -32,8 +45,7 @@ module.exports = async (app, event, context, ec, utils, store, msgText, errHandl
         utils.msgConfig(ec.botToken, ec.channelID, msgText.staffError(rotation))
       );
     }
-  }
-  catch (err) {
+  } catch (err) {
     errHandler(app, ec, utils, err, msgText);
   }
 };

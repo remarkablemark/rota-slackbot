@@ -12,7 +12,8 @@ const utils = {
     // @rota "[rotation]" staff [@username, @username, @username]
     // Accepts a space-separated list of usernames to staff a rotation
     // List of mentions has to start with <@U and end with > but can contain spaces, commas, multiple user mentions
-    staff: /^<@(U[A-Z0-9]+?)> "([a-z0-9\-]+?)" (staff) (<@U[<@>A-Z0-9,\s]+?>)$/g,
+    staff:
+      /^<@(U[A-Z0-9]+?)> "([a-z0-9\-]+?)" (staff) (<@U[<@>A-Z0-9,\s]+?>)$/g,
     // @rota "[rotation]" reset staff
     // Removes rotation staff list
     'reset staff': /^<@(U[A-Z0-9]+?)> "([a-z0-9\-]+?)" (reset staff)$/g,
@@ -21,7 +22,8 @@ const utils = {
     userID: /^<@([A-Z0-9]+?)[a-z|._\-]*?>$/g,
     // @rota "[rotation]" assign [@username] [optional handoff message]
     // Assigns a user to a rotation
-    assign: /^<@(U[A-Z0-9]+?)> "([a-z0-9\-]+?)" (assign) (<@U[A-Z0-9]+?>)(.*)$/g,
+    assign:
+      /^<@(U[A-Z0-9]+?)> "([a-z0-9\-]+?)" (assign) (<@U[A-Z0-9]+?>)(.*)$/g,
     // @rota "[rotation]" assign next [optional handoff message]
     // Assigns a user to a rotation
     'assign next': /^<@(U[A-Z0-9]+?)> "([a-z0-9\-]+?)" (assign next)(.*)$/g,
@@ -47,7 +49,7 @@ const utils = {
     // @rota "[rotation]" any other message
     // Message does not contain a command
     // Sends message text
-    message: /^<@(U[A-Z0-9]+?)> "([a-z0-9\-]+?)" (.*)$/g
+    message: /^<@(U[A-Z0-9]+?)> "([a-z0-9\-]+?)" (.*)$/g,
   },
   /**
    * Clean up message text so it can be tested / parsed
@@ -58,8 +60,9 @@ const utils = {
     const cleanMsg = msg
       .replace('Reminder: ', '')
       .replace("_(sent with '/gator')_", '')
-      .replace(/\|[a-z0-9._\-]+?>/g, '>')     // Remove username if present in mentions
-      .replace(/“/g, '"').replace(/”/g, '"')  // Slack decided to use smart quotes (ugh)
+      .replace(/\|[a-z0-9._\-]+?>/g, '>') // Remove username if present in mentions
+      .replace(/“/g, '"')
+      .replace(/”/g, '"') // Slack decided to use smart quotes (ugh)
       .trim();
     return cleanMsg;
   },
@@ -79,7 +82,7 @@ const utils = {
    */
   rotationInList(rotaname, list) {
     if (list && list.length) {
-      return list.filter(rotation => rotation.name === rotaname).length > 0;
+      return list.filter((rotation) => rotation.name === rotaname).length > 0;
     }
     return false;
   },
@@ -116,33 +119,36 @@ const utils = {
           rotation: res[2],
           command: res[3],
           user: res[4],
-          handoff: res[5].trim()
-        }
+          handoff: res[5].trim(),
+        };
       }
       // Rotation, command, freeform text
       else if (cmd === 'assign next') {
         return {
           rotation: res[2],
           command: res[3],
-          handoff: res[4].trim()
-        }
+          handoff: res[4].trim(),
+        };
       }
       // Rotation, command, list of space-separated usermentions
       // Proofed to accommodate use of comma+space separation and minor whitespace typos
       else if (cmd === 'staff') {
         const getStaffArray = (staffStr) => {
-          const cleanStr = staffStr.replace(/,/g, '').replace(/></g, '> <').trim();
+          const cleanStr = staffStr
+            .replace(/,/g, '')
+            .replace(/></g, '> <')
+            .trim();
           const arr = cleanStr.split(' ');
-          const noEmpty = arr.filter(item => !!item !== false);   // Remove falsey values
-          const noDupes = new Set(noEmpty);                       // Remove duplicates
-          const cleanArr = [...noDupes];                          // Convert set back to array
+          const noEmpty = arr.filter((item) => !!item !== false); // Remove falsey values
+          const noDupes = new Set(noEmpty); // Remove duplicates
+          const cleanArr = [...noDupes]; // Convert set back to array
           return cleanArr || [];
         };
         return {
           rotation: res[2],
           command: res[3],
-          staff: getStaffArray(res[4])
-        }
+          staff: getStaffArray(res[4]),
+        };
       }
       // Rotation, command, parameters
       else if (cmd === 'new') {
@@ -150,14 +156,16 @@ const utils = {
         return {
           rotation: res[3],
           command: res[2],
-          description: description ? description.trim() : '(_no description provided_)'
+          description: description
+            ? description.trim()
+            : '(_no description provided_)',
         };
       }
       // Command, rotation
       else if (cmd === 'delete') {
         return {
           rotation: res[3],
-          command: res[2]
+          command: res[2],
         };
       }
       // Rotation, command
@@ -165,20 +173,25 @@ const utils = {
         return {
           rotation: res[2],
           command: res[3],
-          description: res[4].trim()
+          description: res[4].trim(),
         };
       }
       // Rotation, command
-      else if (cmd === 'about' || cmd === 'unassign' || cmd === 'who' || cmd === 'reset staff') {
+      else if (
+        cmd === 'about' ||
+        cmd === 'unassign' ||
+        cmd === 'who' ||
+        cmd === 'reset staff'
+      ) {
         return {
           rotation: res[2],
-          command: res[3]
+          command: res[3],
         };
       }
       // Command
       else if (cmd === 'help' || cmd === 'list') {
         return {
-          command: res[2]
+          command: res[2],
         };
       }
       // Rotation, message
@@ -187,7 +200,7 @@ const utils = {
         return {
           command: cmd,
           rotation: res[2],
-          message: res[3]
+          message: res[3],
         };
       }
     }
@@ -206,8 +219,8 @@ const utils = {
     return {
       token: botToken,
       channel: channelID,
-      text: text
-    }
+      text: text,
+    };
   },
   /**
    * Config object for Slack messages using block kit UI
@@ -220,8 +233,8 @@ const utils = {
     return {
       token: botToken,
       channel: channelID,
-      blocks: blocks
-    }
+      blocks: blocks,
+    };
   },
   /**
    * Config object for ephemeral Slack messages
@@ -236,8 +249,8 @@ const utils = {
       token: botToken,
       channel: channelID,
       user: user,
-      text: text
-    }
+      text: text,
+    };
   },
   /**
    * Message middleware: ignore some kinds of messages
@@ -245,11 +258,14 @@ const utils = {
    * (Customer service was contacted; unreliable behavior confirmed)
    * @param {object} event event object
    * @return {Promise<void>} continue if not ignored message type
-  */
+   */
   async ignoreMention({ message, event, next }) {
     const disallowedSubtypes = ['channel_topic', 'message_changed'];
     const ignoreSubtypeEvent = disallowedSubtypes.indexOf(event.subtype) > -1;
-    const ignoreSubtypeMessage = message && message.subtype && disallowedSubtypes.indexOf(message.subtype) > -1;
+    const ignoreSubtypeMessage =
+      message &&
+      message.subtype &&
+      disallowedSubtypes.indexOf(message.subtype) > -1;
     const ignoreEdited = !!event.edited;
     // If mention should be ignored, return
     if (ignoreSubtypeEvent || ignoreSubtypeMessage || ignoreEdited) {
@@ -257,7 +273,7 @@ const utils = {
     }
     // If mention should be processed, continue
     await next();
-  }
+  },
 };
 
 module.exports = utils;

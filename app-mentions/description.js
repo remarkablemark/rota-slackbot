@@ -3,7 +3,16 @@
   @rota "[rotation-name]" description [new description]
   Updates the description for an existing rotation
 ------------------*/
-module.exports = async (app, event, context, ec, utils, store, msgText, errHandler) => {
+module.exports = async (
+  app,
+  event,
+  context,
+  ec,
+  utils,
+  store,
+  msgText,
+  errHandler
+) => {
   try {
     const pCmd = await utils.parseCmd('description', event, context);
     const rotation = pCmd.rotation;
@@ -14,7 +23,11 @@ module.exports = async (app, event, context, ec, utils, store, msgText, errHandl
         // If there is no description, send an error message
         // This is unlikely to happen but possible if the user entered a whitespace and nothing else
         const result = await app.client.chat.postMessage(
-          utils.msgConfig(ec.botToken, ec.channelID, msgText.descEmpty(rotation))
+          utils.msgConfig(
+            ec.botToken,
+            ec.channelID,
+            msgText.descEmpty(rotation)
+          )
         );
       } else {
         // Rotation exists and description isn't falsey
@@ -22,7 +35,11 @@ module.exports = async (app, event, context, ec, utils, store, msgText, errHandl
         const save = await store.updateDescription(rotation, description);
         // Confirm in channel with message about updating description
         const result = await app.client.chat.postMessage(
-          utils.msgConfig(ec.botToken, ec.channelID, msgText.descConfirm(rotation, description))
+          utils.msgConfig(
+            ec.botToken,
+            ec.channelID,
+            msgText.descConfirm(rotation, description)
+          )
         );
       }
     } else {
@@ -31,8 +48,7 @@ module.exports = async (app, event, context, ec, utils, store, msgText, errHandl
         utils.msgConfig(ec.botToken, ec.channelID, msgText.descError(rotation))
       );
     }
-  }
-  catch (err) {
+  } catch (err) {
     errHandler(app, ec, utils, err, msgText);
   }
 };

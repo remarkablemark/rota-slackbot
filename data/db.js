@@ -12,7 +12,7 @@ const store = {
     return Rota.find({}, (err, rotations) => {
       const arr = [];
       if (err) console.error(err.message);
-      rotations.forEach(rotation => {
+      rotations.forEach((rotation) => {
         arr.push(rotation);
       });
       return arr;
@@ -30,7 +30,7 @@ const store = {
       const rotation = new Rota({
         name: rotaname,
         description: description,
-        assigned: null
+        assigned: null,
       });
       rotation.save((err) => {
         if (err) console.error(err.message);
@@ -58,7 +58,7 @@ const store = {
    * Save rotation staff to rotation store
    * @param {string} rotaname rotation name
    * @param {string[]} staffArr array of staff user IDs
-   * 
+   *
    */
   async saveStaff(rotaname, staffArr) {
     return Rota.findOne({ name: rotaname }, (err, rotation) => {
@@ -104,11 +104,11 @@ const store = {
   async deleteRotation(rotaname) {
     return Rota.findOne({ name: rotaname }, (err, rotation) => {
       if (err) console.error(err.message);
-      rotation.remove(err => {
+      rotation.remove((err) => {
         if (err) console.error(err.message);
       });
     });
-  }
+  },
 };
 
 module.exports = store;

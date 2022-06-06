@@ -8,7 +8,11 @@ module.exports = async (app, ec, utils, msgText, errHandler) => {
     // If the store is not empty
     if (ec.rotaList && ec.rotaList.length) {
       const result = await app.client.chat.postMessage(
-        utils.msgConfig(ec.botToken, ec.channelID, msgText.listReport(ec.rotaList))
+        utils.msgConfig(
+          ec.botToken,
+          ec.channelID,
+          msgText.listReport(ec.rotaList)
+        )
       );
     } else {
       // If store is empty
@@ -16,8 +20,7 @@ module.exports = async (app, ec, utils, msgText, errHandler) => {
         utils.msgConfig(ec.botToken, ec.channelID, msgText.listEmpty())
       );
     }
-  }
-  catch (err) {
+  } catch (err) {
     errHandler(app, ec, utils, err, msgText);
   }
 };

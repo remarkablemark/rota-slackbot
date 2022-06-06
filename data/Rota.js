@@ -8,7 +8,7 @@ const rotaSchema = new Schema({
   name: { type: String, required: true },
   description: String,
   assigned: String,
-  staff: [String]
+  staff: [String],
 });
 
 module.exports = mongoose.model('Rota', rotaSchema);

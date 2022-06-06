@@ -10,7 +10,7 @@ const store = require('./data/db');
 // Create Bolt app
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
-  signingSecret: process.env.SLACK_SIGNING_SECRET
+  signingSecret: process.env.SLACK_SIGNING_SECRET,
 });
 const port = process.env.PORT || 3000;
 
@@ -23,9 +23,17 @@ mongoose.set('useUnifiedTopology', true);
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true });
 const db = mongoose.connection;
 // Capture connection errors
-db.on('error', console.error.bind(console, 'MongoDB Connection Error. Please make sure that', process.env.MONGO_URI, 'is running.'));
+db.on(
+  'error',
+  console.error.bind(
+    console,
+    'MongoDB Connection Error. Please make sure that',
+    process.env.MONGO_URI,
+    'is running.'
+  )
+);
 // Open connection
-db.once('open', function() {
+db.once('open', function () {
   console.info('Connected to MongoDB:', process.env.MONGO_URI);
 });
 
