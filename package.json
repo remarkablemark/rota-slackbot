@@ -5,7 +5,9 @@
   "author": "Kim Maida",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@slack/bolt": "^3.3.0",
