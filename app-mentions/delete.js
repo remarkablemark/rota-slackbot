@@ -1,9 +1,13 @@
-/*------------------
-  DELETE
-  @rota delete "[rotation]"
-  Deletes an existing rotation
-------------------*/
-module.exports = async (
+/**
+ * DELETE
+ *
+ * ```
+ * @rota delete "[rotation]"
+ * ```
+ *
+ * Deletes an existing rotation
+ */
+module.exports = async function deleteRotation(
   app,
   event,
   context,
@@ -12,7 +16,7 @@ module.exports = async (
   store,
   msgText,
   errHandler
-) => {
+) {
   try {
     const pCmd = await utils.parseCmd('delete', event, context);
     const rotation = pCmd.rotation;
@@ -37,7 +41,7 @@ module.exports = async (
         )
       );
     }
-  } catch (err) {
-    errHandler(app, ec, utils, err, msgText);
+  } catch (error) {
+    errHandler(app, ec, utils, error, msgText);
   }
 };
