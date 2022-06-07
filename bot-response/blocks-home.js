@@ -1,12 +1,12 @@
-const introArr = require('./blocks-intro');
-const commandsArr = require('./blocks-commands');
+const introBlocks = require('./blocks-intro');
+const commandsBlocks = require('./blocks-commands');
 
-/*------------------
-    BLOCKS: HOME
-------------------*/
-const homeBlocks = (userID, storeList) => {
+/**
+ * BLOCKS: HOME
+ */
+module.exports = function homeBlocks(userID, storeList) {
   // Return an object of staff and assignments
-  const staffAssign = (userID) => {
+  function staffAssign(userID) {
     const results = { staff: [], assignments: [] };
     for (const rotation in storeList) {
       const thisRota = storeList[rotation];
@@ -22,7 +22,8 @@ const homeBlocks = (userID, storeList) => {
       }
     }
     return results;
-  };
+  }
+
   // Take an array and output a text list
   const mdList = (arr) => {
     let str = '';
@@ -35,7 +36,8 @@ const homeBlocks = (userID, storeList) => {
     return '_None at the moment!_';
   };
   const rotaObj = staffAssign(userID);
-  const homeArr = [
+
+  const homeBlocks = [
     {
       type: 'section',
       text: {
@@ -87,7 +89,7 @@ const homeBlocks = (userID, storeList) => {
     },
   ];
 
-  const tipsArr = [
+  const tipsBlocks = [
     {
       type: 'divider',
     },
@@ -163,7 +165,7 @@ const homeBlocks = (userID, storeList) => {
     },
   ];
 
-  const footerArr = [
+  const footerBlocks = [
     {
       type: 'divider',
     },
@@ -178,11 +180,10 @@ const homeBlocks = (userID, storeList) => {
     },
   ];
 
-  return introArr
-    .concat(homeArr)
-    .concat(commandsArr)
-    .concat(tipsArr)
-    .concat(footerArr);
+  return introBlocks.concat(
+    homeBlocks,
+    commandsBlocks,
+    tipsBlocks,
+    footerBlocks
+  );
 };
-
-module.exports = homeBlocks;
