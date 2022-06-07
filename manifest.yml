@@ -1,0 +1,24 @@
+display_information:
+  name: rota
+features:
+  app_home:
+    home_tab_enabled: true
+    messages_tab_enabled: false
+    messages_tab_read_only_enabled: true
+  bot_user:
+    display_name: rota
+    always_online: true
+oauth_config:
+  scopes:
+    bot:
+      - app_mentions:read
+      - chat:write
+settings:
+  event_subscriptions:
+    request_url: https://domain/slack/events # TODO: replace `domain`
+    bot_events:
+      - app_home_opened
+      - app_mention
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: false
