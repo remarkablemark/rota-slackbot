@@ -1,9 +1,13 @@
-/*------------------
-  (MESSAGE)
-  @rota "[rotation]" free form message for on-call user
-  Send message to on-call user via DM with link to channel
-------------------*/
-module.exports = async (
+/**
+ * (MESSAGE)
+ *
+ * ```
+ * @rota "[rotation]" free form message for on-call user
+ * ```
+ *
+ * Send message to on-call user via DM with link to channel
+ */
+module.exports = async function messageRotation(
   app,
   event,
   context,
@@ -12,7 +16,7 @@ module.exports = async (
   store,
   msgText,
   errHandler
-) => {
+) {
   try {
     const pCmd = await utils.parseCmd('message', event, context);
     const rotation = pCmd.rotation;
@@ -71,7 +75,7 @@ module.exports = async (
         utils.msgConfig(ec.botToken, ec.channelID, msgText.msgError(rotation))
       );
     }
-  } catch (err) {
-    errHandler(app, ec, utils, err, msgText);
+  } catch (error) {
+    errHandler(app, ec, utils, error, msgText);
   }
 };
