@@ -1,10 +1,14 @@
-/*------------------
-  STAFF
-  @rota "[rotation-name]" staff [@user @user @user]
-  Staffs a rotation by passing a space-separated list of users
-  Also allows comma-separated lists; fairly robust against extra spaces/commas
-------------------*/
-module.exports = async (
+/**
+ * STAFF
+ *
+ * ```
+ * @rota "[rotation-name]" staff [@user @user @user]
+ * ```
+ *
+ * Staffs a rotation by passing a space-separated list of users
+ * Also allows comma-separated lists; fairly robust against extra spaces/commas
+ */
+module.exports = async function staffRotation(
   app,
   event,
   context,
@@ -13,7 +17,7 @@ module.exports = async (
   store,
   msgText,
   errHandler
-) => {
+) {
   try {
     const pCmd = await utils.parseCmd('staff', event, context);
     const rotation = pCmd.rotation;
@@ -45,7 +49,7 @@ module.exports = async (
         utils.msgConfig(ec.botToken, ec.channelID, msgText.staffError(rotation))
       );
     }
-  } catch (err) {
-    errHandler(app, ec, utils, err, msgText);
+  } catch (error) {
+    errHandler(app, ec, utils, error, msgText);
   }
 };
