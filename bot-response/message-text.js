@@ -259,9 +259,9 @@ const msgText = {
   didntUnderstand: (ec, msgText) => {
     return (
       ":thinking_face: I'm sorry, I didn't understand that. To see my full capabilities and learn how to format commands, type `@rota help`.\nUndecipherable message text: `" +
-      msgText +
+      JSON.stringify(msgText, null, 2) +
       '`\nResponse log:\n```' +
-      ec +
+      JSON.stringify(ec, null, 2) +
       '```'
     );
   },
