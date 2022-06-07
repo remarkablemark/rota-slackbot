@@ -1,10 +1,10 @@
-const introArr = require('./blocks-intro');
-const commandsArr = require('./blocks-commands');
+const introBlocks = require('./blocks-intro');
+const commandsBlocks = require('./blocks-commands');
 
-/*------------------
-    BLOCKS: HELP
-------------------*/
-const helpBlocks = () => {
+/**
+ * BLOCKS: HELP
+ */
+module.exports = function helpBlocks() {
   const appHome = [
     {
       type: 'section',
@@ -17,7 +17,6 @@ const helpBlocks = () => {
       type: 'divider',
     },
   ];
-  return introArr.concat(appHome).concat(commandsArr);
-};
 
-module.exports = helpBlocks;
+  return introBlocks.concat(appHome, commandsBlocks);
+};
