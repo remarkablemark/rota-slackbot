@@ -1,9 +1,13 @@
-/*------------------
-  ASSIGN
-  @rota "[rotation]" assign [@user] [handoff message]
-  Assigns a user to specified rotation
-------------------*/
-module.exports = async (
+/**
+ * ASSIGN
+ *
+ * ```
+ * @rota "[rotation]" assign [@user] [handoff message]
+ * ```
+ *
+ * Assigns a user to specified rotation
+ */
+module.exports = async function assignRotation(
   app,
   event,
   context,
@@ -12,7 +16,7 @@ module.exports = async (
   store,
   msgText,
   errHandler
-) => {
+) {
   try {
     const pCmd = await utils.parseCmd('assign', event, context);
     const rotation = pCmd.rotation;
@@ -72,7 +76,7 @@ module.exports = async (
         )
       );
     }
-  } catch (err) {
-    errHandler(app, ec, utils, err, msgText);
+  } catch (error) {
+    errHandler(app, ec, utils, error, msgText);
   }
 };
