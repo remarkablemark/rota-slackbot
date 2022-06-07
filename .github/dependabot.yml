@@ -12,5 +12,7 @@ updates:
       interval: 'daily'
 
     # Optional
+    commit-message:
+      prefix: build
     labels:
       - 'dependencies'
