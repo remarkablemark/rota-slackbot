@@ -1,9 +1,13 @@
-/*------------------
-  WHO
-  @rota "[rotation]" who
-  Reports who the assigned user is for a rotation
-------------------*/
-module.exports = async (
+/**
+ * WHO
+ *
+ * ```
+ * @rota "[rotation]" who
+ * ```
+ *
+ * Reports who the assigned user is for a rotation
+ */
+module.exports = async function whoRotation(
   app,
   event,
   context,
@@ -12,7 +16,7 @@ module.exports = async (
   store,
   msgText,
   errHandler
-) => {
+) {
   try {
     const pCmd = await utils.parseCmd('who', event, context);
     const rotation = pCmd.rotation;
@@ -45,7 +49,7 @@ module.exports = async (
         utils.msgConfig(ec.botToken, ec.channelID, msgText.whoError(rotation))
       );
     }
-  } catch (err) {
-    errHandler(app, ec, utils, err, msgText);
+  } catch (error) {
+    errHandler(app, ec, utils, error, msgText);
   }
 };
