@@ -8,106 +8,88 @@ const store = {
    * Get rotations
    * @return {object[]} array of existing rotation objects
    */
-  async getRotations() {
-    return Rota.find({}, (err, rotations) => {
-      const arr = [];
-      if (err) console.error(err.message);
-      rotations.forEach((rotation) => {
-        arr.push(rotation);
-      });
-      return arr;
-    });
+  getRotations() {
+    return Rota.find();
   },
+
   /**
    * Create new rotation
    * @param {string} rotaname name of new rotation
    * @param {string} description description of new rotation
    * @return {object} newly saved rotation
    */
-  async newRotation(rotaname, description) {
-    return Rota.findOne({ name: rotaname }, (err) => {
-      if (err) console.error(err.message);
-      const rotation = new Rota({
+  newRotation(rotaname, description) {
+    return Rota.findOneAndUpdate(
+      { name: rotaname },
+      {
         name: rotaname,
         description: description,
         assigned: null,
-      });
-      rotation.save((err) => {
-        if (err) console.error(err.message);
-        return rotation;
-      });
-    });
+        upsert: true,
+      }
+    );
   },
+
   /**
    * Update description for existing rotation
    * @param {string} rotaname updated name of rotation
    * @param {string} description updated description of rotation
    * @return {object} newly updated, saved rotation
    */
-  async updateDescription(rotaname, description) {
-    return Rota.findOne({ name: rotaname }, (err, rotation) => {
-      if (err) console.error(err.message);
-      rotation.description = description;
-      rotation.save((err) => {
-        if (err) console.error(err.message);
-        return rotation;
-      });
-    });
+  updateDescription(rotaname, description) {
+    return Rota.findOneAndUpdate(
+      { name: rotaname },
+      {
+        description,
+      }
+    );
   },
+
   /**
    * Save rotation staff to rotation store
    * @param {string} rotaname rotation name
    * @param {string[]} staffArr array of staff user IDs
    *
    */
-  async saveStaff(rotaname, staffArr) {
-    return Rota.findOne({ name: rotaname }, (err, rotation) => {
-      if (err) console.error(err.message);
-      rotation.staff = staffArr;
-      rotation.save((err) => {
-        if (err) console.error(err.message);
-        return rotation;
-      });
-    });
+  saveStaff(rotaname, staffArr) {
+    return Rota.findOneAndUpdate(
+      { name: rotaname },
+      {
+        staff: staffArr,
+      }
+    );
   },
+
   /**
    * Save user assignment to rotation store
    * @param {string} rotaname rotation name
    * @param {string} usermention user mention string <@UXXXXX>
    * @return {object} saved rotation with new assignment
    */
-  async saveAssignment(rotaname, usermention) {
-    return Rota.findOne({ name: rotaname }, (err, rotation) => {
-      if (err) console.error(err.message);
-      rotation.assigned = usermention;
-      rotation.save((err) => {
-        if (err) console.error(err.message);
-        return rotation;
-      });
-    });
+  saveAssignment(rotaname, usermention) {
+    return Rota.findOneAndUpdate(
+      { name: rotaname },
+      {
+        assigned: usermention,
+      }
+    );
   },
+
   /**
    * Get rotation object for a specific rotation
    * @param {string} rotaname rotation name
    * @return {object} rotation object
    */
-  async getRotation(rotaname) {
-    return Rota.findOne({ name: rotaname }, (err, rotation) => {
-      if (err) console.error(err.message);
-      return rotation;
-    });
+  getRotation(rotaname) {
+    return Rota.findOne({ name: rotaname });
   },
+
   /**
    * Deletes a rotation entirely
    * @param {string} rotaname rotation name
    */
-  async deleteRotation(rotaname) {
-    return Rota.findOne({ name: rotaname }, (err, rotation) => {
-      if (err) console.error(err.message);
-      rotation.remove((err) => {
-        if (err) console.error(err.message);
-      });
-    });
+  deleteRotation(rotaname) {
+    return Rota.findOneAndRemove({ name: rotaname });
   },
 };
 
