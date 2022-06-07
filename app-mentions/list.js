@@ -1,9 +1,19 @@
-/*------------------
-  LIST
-  @rota list
-  Lists all rotations, descriptions, and assignments
-------------------*/
-module.exports = async (app, ec, utils, msgText, errHandler) => {
+/**
+ * LIST
+ *
+ * ```
+ * @rota list
+ * ```
+ *
+ * Lists all rotations, descriptions, and assignments
+ */
+module.exports = async function listRotation(
+  app,
+  ec,
+  utils,
+  msgText,
+  errHandler
+) {
   try {
     // If the store is not empty
     if (ec.rotaList && ec.rotaList.length) {
@@ -20,7 +30,7 @@ module.exports = async (app, ec, utils, msgText, errHandler) => {
         utils.msgConfig(ec.botToken, ec.channelID, msgText.listEmpty())
       );
     }
-  } catch (err) {
-    errHandler(app, ec, utils, err, msgText);
+  } catch (error) {
+    errHandler(app, ec, utils, error, msgText);
   }
 };
