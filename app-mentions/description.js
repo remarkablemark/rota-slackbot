@@ -1,9 +1,13 @@
-/*------------------
-  DESCRIPTION
-  @rota "[rotation-name]" description [new description]
-  Updates the description for an existing rotation
-------------------*/
-module.exports = async (
+/**
+ * DESCRIPTION
+ *
+ * ```
+ * @rota "[rotation-name]" description [new description]
+ * ```
+ *
+ * Updates the description for an existing rotation
+ */
+module.exports = async function descriptionRotation(
   app,
   event,
   context,
@@ -12,7 +16,7 @@ module.exports = async (
   store,
   msgText,
   errHandler
-) => {
+) {
   try {
     const pCmd = await utils.parseCmd('description', event, context);
     const rotation = pCmd.rotation;
@@ -48,7 +52,7 @@ module.exports = async (
         utils.msgConfig(ec.botToken, ec.channelID, msgText.descError(rotation))
       );
     }
-  } catch (err) {
-    errHandler(app, ec, utils, err, msgText);
+  } catch (error) {
+    errHandler(app, ec, utils, error, msgText);
   }
 };
