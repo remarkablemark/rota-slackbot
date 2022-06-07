@@ -1,9 +1,13 @@
-/*------------------
-  ABOUT
-  @rota "[rotation]" about
-  Provides description and assignment for specified rotation
-------------------*/
-module.exports = async (
+/**
+ * ABOUT
+ *
+ * ```
+ * @rota "[rotation]" about
+ * ```
+ *
+ * Provides description and assignment for specified rotation
+ */
+module.exports = async function aboutRotation(
   app,
   event,
   context,
@@ -12,7 +16,7 @@ module.exports = async (
   store,
   msgText,
   errHandler
-) => {
+) {
   try {
     const pCmd = await utils.parseCmd('about', event, context);
     const rotation = pCmd.rotation;
@@ -45,7 +49,7 @@ module.exports = async (
         utils.msgConfig(ec.botToken, ec.channelID, msgText.aboutError(rotation))
       );
     }
-  } catch (err) {
-    errHandler(app, ec, utils, err, msgText);
+  } catch (error) {
+    errHandler(app, ec, utils, error, msgText);
   }
 };
