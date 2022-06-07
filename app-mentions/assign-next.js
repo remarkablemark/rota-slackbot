@@ -1,9 +1,13 @@
-/*------------------
-  ASSIGN NEXT
-  @rota "[rotation]" assign next [handoff message]
-  Assigns next user in staff list to rotation
-------------------*/
-module.exports = async (
+/**
+ * ASSIGN NEXT
+ *
+ * ```
+ * @rota "[rotation]" assign next [handoff message]
+ * ```
+ *
+ * Assigns next user in staff list to rotation
+ */
+module.exports = async function assignNextRotation(
   app,
   event,
   context,
@@ -12,7 +16,7 @@ module.exports = async (
   store,
   msgText,
   errHandler
-) => {
+) {
   try {
     const pCmd = await utils.parseCmd('assign next', event, context);
     const rotation = pCmd.rotation;
@@ -106,7 +110,7 @@ module.exports = async (
         )
       );
     }
-  } catch (err) {
-    errHandler(app, ec, utils, err, msgText);
+  } catch (error) {
+    errHandler(app, ec, utils, error, msgText);
   }
 };
