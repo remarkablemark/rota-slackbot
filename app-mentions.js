@@ -61,9 +61,8 @@ const app_mentions = (app, store) => {
     // @rota new "[rotation]" [optional description]
     if (isNew) {
       cmdNew(app, event, context, ec, utils, store, msgText, errHandler);
-    }
-    // @rota "[rotation]" description [new description]
-    else if (isDescription) {
+    } else if (isDescription) {
+      // @rota "[rotation]" description [new description]
       cmdDescription(
         app,
         event,
@@ -74,53 +73,41 @@ const app_mentions = (app, store) => {
         msgText,
         errHandler
       );
-    }
-    // @rota "[rotation]" staff [@user @user @user]
-    else if (isStaff) {
+    } else if (isStaff) {
+      // @rota "[rotation]" staff [@user @user @user]
       cmdStaff(app, event, context, ec, utils, store, msgText, errHandler);
-    }
-    // @rota "[rotation]" reset staff
-    else if (isResetStaff) {
+    } else if (isResetStaff) {
+      // @rota "[rotation]" reset staff
       cmdResetStaff(app, event, context, ec, utils, store, msgText, errHandler);
-    }
-    // @rota "[rotation]" delete
-    else if (isDelete) {
+    } else if (isDelete) {
+      // @rota "[rotation]" delete
       cmdDelete(app, event, context, ec, utils, store, msgText, errHandler);
-    }
-    // @rota "[rotation]" about
-    else if (isAbout) {
+    } else if (isAbout) {
+      // @rota "[rotation]" about
       cmdAbout(app, event, context, ec, utils, store, msgText, errHandler);
-    }
-    // @rota "[rotation]" assign [@user] [handoff message]
-    else if (isAssign) {
+    } else if (isAssign) {
+      // @rota "[rotation]" assign [@user] [handoff message]
       cmdAssign(app, event, context, ec, utils, store, msgText, errHandler);
-    }
-    // @rota "[rotation]" assign next [handoff message]
-    else if (isAssignNext) {
+    } else if (isAssignNext) {
+      // @rota "[rotation]" assign next [handoff message]
       cmdAssignNext(app, event, context, ec, utils, store, msgText, errHandler);
-    }
-    // @rota "[rotation]" who
-    else if (isWho) {
+    } else if (isWho) {
+      // @rota "[rotation]" who
       cmdWho(app, event, context, ec, utils, store, msgText, errHandler);
-    }
-    // @rota "[rotation]" unassign
-    else if (isUnassign) {
+    } else if (isUnassign) {
+      // @rota "[rotation]" unassign
       cmdUnassign(app, event, context, ec, utils, store, msgText, errHandler);
-    }
-    // @rota list
-    else if (isList) {
+    } else if (isList) {
+      // @rota list
       cmdList(app, ec, utils, msgText, errHandler);
-    }
-    // @rota help
-    else if (isHelp) {
+    } else if (isHelp) {
+      // @rota help
       cmdHelp(app, ec, utils, helpBlocks, msgText, errHandler);
-    }
-    // @rota "[rotation]" free form message for on-call user
-    else if (isMessage) {
+    } else if (isMessage) {
+      // @rota "[rotation]" free form message for on-call user
       cmdMessage(app, event, context, ec, utils, store, msgText, errHandler);
-    }
-    // @rota anything else
-    else {
+    } else {
+      // @rota anything else
       try {
         // console.log('Event: ', event, 'Clean Text: ', utils.cleanText(ec.text));
         await app.client.chat.postMessage(
@@ -136,4 +123,5 @@ const app_mentions = (app, store) => {
     }
   });
 };
+
 module.exports = app_mentions;
