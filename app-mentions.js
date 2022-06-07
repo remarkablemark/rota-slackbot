@@ -33,35 +33,19 @@ module.exports = function app_mentions(app, store) {
     };
 
     // Decision logic establishing how to respond to mentions
-    const [
-      isNew,
-      isDescription,
-      isStaff,
-      isResetStaff,
-      isAssign,
-      isAssignNext,
-      isWho,
-      isAbout,
-      isUnassign,
-      isDelete,
-      isHelp,
-      isList,
-      testMessage,
-    ] = Promise.all([
-      utils.isCmd('new', ec.text),
-      utils.isCmd('description', ec.text),
-      utils.isCmd('staff', ec.text),
-      utils.isCmd('reset staff', ec.text),
-      utils.isCmd('assign', ec.text),
-      utils.isCmd('assign next', ec.text),
-      utils.isCmd('who', ec.text),
-      utils.isCmd('about', ec.text),
-      utils.isCmd('unassign', ec.text),
-      utils.isCmd('delete', ec.text),
-      utils.isCmd('help', ec.text),
-      utils.isCmd('list', ec.text),
-      utils.isCmd('message', ec.text),
-    ]);
+    const isNew = utils.isCmd('new', ec.text);
+    const isDescription = utils.isCmd('description', ec.text);
+    const isStaff = utils.isCmd('staff', ec.text);
+    const isResetStaff = utils.isCmd('reset staff', ec.text);
+    const isAssign = utils.isCmd('assign', ec.text);
+    const isAssignNext = utils.isCmd('assign next', ec.text);
+    const isWho = utils.isCmd('who', ec.text);
+    const isAbout = utils.isCmd('about', ec.text);
+    const isUnassign = utils.isCmd('unassign', ec.text);
+    const isDelete = utils.isCmd('delete', ec.text);
+    const isHelp = utils.isCmd('help', ec.text);
+    const isList = utils.isCmd('list', ec.text);
+    const testMessage = utils.isCmd('message', ec.text);
 
     const isMessage =
       testMessage &&
