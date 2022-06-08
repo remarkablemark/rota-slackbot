@@ -23,4 +23,4 @@ const introBlocks = [
   },
 ];
 
-module.exports = introBlocks;
+export default introBlocks;

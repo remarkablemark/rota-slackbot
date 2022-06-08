@@ -7,15 +7,15 @@
  *
  * Reports who the assigned user is for a rotation
  */
-module.exports = async function whoRotation(
-  app,
-  event,
-  context,
-  ec,
-  utils,
-  store,
-  msgText,
-  errHandler
+export default async function whoRotation(
+  app: any,
+  event: any,
+  context: any,
+  ec: any,
+  utils: any,
+  store: any,
+  msgText: any,
+  errHandler: any
 ) {
   try {
     const pCmd = await utils.parseCmd('who', event, context);
@@ -52,4 +52,4 @@ module.exports = async function whoRotation(
   } catch (error) {
     errHandler(app, ec, utils, error, msgText);
   }
-};
+}

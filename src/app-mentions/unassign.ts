@@ -7,15 +7,15 @@
  *
  * Clears the assignment for a rotation
  */
-module.exports = async function unassignRotation(
-  app,
-  event,
-  context,
-  ec,
-  utils,
-  store,
-  msgText,
-  errHandler
+export default async function unassignRotation(
+  app: any,
+  event: any,
+  context: any,
+  ec: any,
+  utils: any,
+  store: any,
+  msgText: any,
+  errHandler: any
 ) {
   try {
     const pCmd = await utils.parseCmd('unassign', event, context);
@@ -57,4 +57,4 @@ module.exports = async function unassignRotation(
   } catch (error) {
     errHandler(app, ec, utils, error, msgText);
   }
-};
+}

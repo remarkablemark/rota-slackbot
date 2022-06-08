@@ -8,15 +8,15 @@
  * Staffs a rotation by passing a space-separated list of users
  * Also allows comma-separated lists; fairly robust against extra spaces/commas
  */
-module.exports = async function staffRotation(
-  app,
-  event,
-  context,
-  ec,
-  utils,
-  store,
-  msgText,
-  errHandler
+export default async function staffRotation(
+  app: any,
+  event: any,
+  context: any,
+  ec: any,
+  utils: any,
+  store: any,
+  msgText: any,
+  errHandler: any
 ) {
   try {
     const pCmd = await utils.parseCmd('staff', event, context);
@@ -52,4 +52,4 @@ module.exports = async function staffRotation(
   } catch (error) {
     errHandler(app, ec, utils, error, msgText);
   }
-};
+}

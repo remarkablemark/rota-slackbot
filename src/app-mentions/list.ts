@@ -7,12 +7,12 @@
  *
  * Lists all rotations, descriptions, and assignments
  */
-module.exports = async function listRotation(
-  app,
-  ec,
-  utils,
-  msgText,
-  errHandler
+export default async function listRotation(
+  app: any,
+  ec: any,
+  utils: any,
+  msgText: any,
+  errHandler: any
 ) {
   try {
     // If the store is not empty
@@ -33,4 +33,4 @@ module.exports = async function listRotation(
   } catch (error) {
     errHandler(app, ec, utils, error, msgText);
   }
-};
+}

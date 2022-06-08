@@ -7,15 +7,15 @@
  *
  * Creates a new rotation with description
  */
-module.exports = async function newRotation(
-  app,
-  event,
-  context,
-  ec,
-  utils,
-  store,
-  msgText,
-  errHandler
+export default async function newRotation(
+  app: any,
+  event: any,
+  context: any,
+  ec: any,
+  utils: any,
+  store: any,
+  msgText: any,
+  errHandler: any
 ) {
   try {
     const pCmd = await utils.parseCmd('new', event, context);
@@ -37,4 +37,4 @@ module.exports = async function newRotation(
   } catch (error) {
     errHandler(app, ec, utils, error, msgText);
   }
-};
+}

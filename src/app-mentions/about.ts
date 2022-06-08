@@ -7,15 +7,15 @@
  *
  * Provides description and assignment for specified rotation
  */
-module.exports = async function aboutRotation(
-  app,
-  event,
-  context,
-  ec,
-  utils,
-  store,
-  msgText,
-  errHandler
+export default async function aboutRotation(
+  app: any,
+  event: any,
+  context: any,
+  ec: any,
+  utils: any,
+  store: any,
+  msgText: any,
+  errHandler: any
 ) {
   try {
     const pCmd = await utils.parseCmd('about', event, context);
@@ -52,4 +52,4 @@ module.exports = async function aboutRotation(
   } catch (error) {
     errHandler(app, ec, utils, error, msgText);
   }
-};
+}

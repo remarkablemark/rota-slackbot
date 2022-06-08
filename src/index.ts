@@ -1,24 +1,25 @@
-require('dotenv').config();
-const { App } = require('@slack/bolt');
-// MongoDB
-const mongoose = require('mongoose');
-const store = require('./data/db');
+import { App } from '@slack/bolt';
+import mongoose from 'mongoose';
+
+import appHomeOpened from './app-home-opened';
+import appMentions from './app-mentions';
+import * as store from './data/db';
+import { mongoUri, port, slackBotToken, slackSigningSecret } from './utils/env';
 
 /**
  * ON INIT
  */
 // Create Bolt app
 const app = new App({
-  token: process.env.SLACK_BOT_TOKEN,
-  signingSecret: process.env.SLACK_SIGNING_SECRET,
+  token: slackBotToken,
+  signingSecret: slackSigningSecret,
 });
-const port = process.env.PORT || 3000;
 
 /**
  * MONGODB
  */
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI);
+mongoose.connect(mongoUri);
 const db = mongoose.connection;
 
 // Capture connection errors
@@ -36,12 +37,12 @@ db.once('open', () => {
 /**
  * APP HOME OPENED
  */
-require('./app-home-opened')(app);
+appHomeOpened(app);
 
 /**
  * APP MENTIONS
  */
-require('./app-mentions')(app, store);
+appMentions(app, store);
 
 /**
  * START APP

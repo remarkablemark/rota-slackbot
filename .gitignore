@@ -1,4 +1,6 @@
+*.log
+*.swp
+.DS_Store
 .env
+build
 node_modules
-.vscode
-*.afphoto

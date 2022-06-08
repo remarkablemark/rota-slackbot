@@ -1,35 +1,34 @@
 /**
- * RESET STAFF
+ * DELETE
  *
  * ```
- * @rota "[rotation]" reset staff
+ * @rota delete "[rotation]"
  * ```
  *
- * Removes rotation staff
+ * Deletes an existing rotation
  */
-module.exports = async function resetStaffRotation(
-  app,
-  event,
-  context,
-  ec,
-  utils,
-  store,
-  msgText,
-  errHandler
+export default async function deleteRotation(
+  app: any,
+  event: any,
+  context: any,
+  ec: any,
+  utils: any,
+  store: any,
+  msgText: any,
+  errHandler: any
 ) {
   try {
-    const pCmd = await utils.parseCmd('reset staff', event, context);
+    const pCmd = await utils.parseCmd('delete', event, context);
     const rotation = pCmd.rotation;
 
     if (utils.rotationInList(rotation, ec.rotaList)) {
-      // If rotation exists, set staff to an empty array
-      await store.saveStaff(rotation, []);
-      // Send message to confirm staff has been reset
+      // If rotation exists, delete from store completely
+      await store.deleteRotation(rotation);
       await app.client.chat.postMessage(
         utils.msgConfig(
           ec.botToken,
           ec.channelID,
-          msgText.resetStaffConfirm(rotation)
+          msgText.deleteConfirm(rotation)
         )
       );
     } else {
@@ -38,11 +37,11 @@ module.exports = async function resetStaffRotation(
         utils.msgConfig(
           ec.botToken,
           ec.channelID,
-          msgText.resetStaffError(rotation)
+          msgText.deleteError(rotation)
         )
       );
     }
   } catch (error) {
     errHandler(app, ec, utils, error, msgText);
   }
-};
+}

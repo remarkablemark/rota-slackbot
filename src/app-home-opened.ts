@@ -1,11 +1,11 @@
-const homeBlocks = require('./bot-response/blocks-home');
-const store = require('./data/db');
+import homeBlocks from './bot-response/blocks-home';
+import * as store from './data/db';
 
 /**
  * APP HOME OPENED
  */
-module.exports = function app_home_opened(app) {
-  app.event('app_home_opened', async ({ event, context }) => {
+export default function app_home_opened(app: any) {
+  app.event('app_home_opened', async ({ event, context }: any) => {
     const userID = event.user;
     const storeList = await store.getRotations();
     try {
@@ -22,4 +22,4 @@ module.exports = function app_home_opened(app) {
       console.error(error);
     }
   });
-};
+}

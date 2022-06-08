@@ -7,15 +7,15 @@
  *
  * Send message to on-call user via DM with link to channel
  */
-module.exports = async function messageRotation(
-  app,
-  event,
-  context,
-  ec,
-  utils,
-  store,
-  msgText,
-  errHandler
+export default async function messageRotation(
+  app: any,
+  event: any,
+  context: any,
+  ec: any,
+  utils: any,
+  store: any,
+  msgText: any,
+  errHandler: any
 ) {
   try {
     const pCmd = await utils.parseCmd('message', event, context);
@@ -78,4 +78,4 @@ module.exports = async function messageRotation(
   } catch (error) {
     errHandler(app, ec, utils, error, msgText);
   }
-};
+}

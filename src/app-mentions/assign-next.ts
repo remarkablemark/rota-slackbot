@@ -7,15 +7,15 @@
  *
  * Assigns next user in staff list to rotation
  */
-module.exports = async function assignNextRotation(
-  app,
-  event,
-  context,
-  ec,
-  utils,
-  store,
-  msgText,
-  errHandler
+export default async function assignNextRotation(
+  app: any,
+  event: any,
+  context: any,
+  ec: any,
+  utils: any,
+  store: any,
+  msgText: any,
+  errHandler: any
 ) {
   try {
     const pCmd = await utils.parseCmd('assign next', event, context);
@@ -113,4 +113,4 @@ module.exports = async function assignNextRotation(
   } catch (error) {
     errHandler(app, ec, utils, error, msgText);
   }
-};
+}

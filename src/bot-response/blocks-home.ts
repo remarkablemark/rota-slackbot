@@ -1,40 +1,54 @@
-const introBlocks = require('./blocks-intro');
-const commandsBlocks = require('./blocks-commands');
+import type { Rota } from '../data/Rota';
+import commandsBlocks from './blocks-commands';
+import introBlocks from './blocks-intro';
 
 /**
  * BLOCKS: HOME
  */
-module.exports = function homeBlocks(userID, storeList) {
+export default function homeBlocks(userID: string, storeList: Rota[]) {
   // Return an object of staff and assignments
-  function staffAssign(userID) {
-    const results = { staff: [], assignments: [] };
+  function staffAssign(userID: string) {
+    const results: {
+      staff: string[];
+      assignments: string[];
+    } = {
+      staff: [],
+      assignments: [],
+    };
+
     for (const rotation in storeList) {
-      const thisRota = storeList[rotation];
-      if (thisRota.assigned && thisRota.assigned.includes(userID)) {
-        results.assignments.push(thisRota.name);
+      const currentRota = storeList[rotation];
+
+      if (currentRota.assigned && currentRota.assigned.includes(userID)) {
+        results.assignments.push(currentRota.name);
       }
+
       if (
-        thisRota.staff &&
-        thisRota.staff.length &&
-        thisRota.staff.indexOf(`<@${userID}>`) > -1
+        Array.isArray(currentRota.staff) &&
+        currentRota.staff.indexOf(`<@${userID}>`) > -1
       ) {
-        results.staff.push(thisRota.name);
+        results.staff.push(currentRota.name);
       }
     }
+
     return results;
   }
 
   // Take an array and output a text list
-  const mdList = (arr) => {
-    let str = '';
-    for (const item of arr) {
-      str = str + `• ${item}\n`;
+  const mdList = (array: string[]) => {
+    let result = '';
+
+    for (const item of array) {
+      result = result + `• ${item}\n`;
     }
-    if (str.length) {
-      return str;
+
+    if (result.length) {
+      return result;
     }
+
     return '_None at the moment!_';
   };
+
   const rotaObj = staffAssign(userID);
 
   const homeBlocks = [
@@ -45,6 +59,7 @@ module.exports = function homeBlocks(userID, storeList) {
         text: `:bellhop_bell: *<@${userID}>'s Active On-Call Rotations:*`,
       },
     },
+
     {
       type: 'context',
       elements: [
@@ -54,6 +69,7 @@ module.exports = function homeBlocks(userID, storeList) {
         },
       ],
     },
+
     {
       type: 'section',
       text: {
@@ -61,6 +77,7 @@ module.exports = function homeBlocks(userID, storeList) {
         text: mdList(rotaObj.assignments),
       },
     },
+
     {
       type: 'section',
       text: {
@@ -68,6 +85,7 @@ module.exports = function homeBlocks(userID, storeList) {
         text: `:card_index: *<@${userID}> Is On Rotation Staff:*`,
       },
     },
+
     {
       type: 'context',
       elements: [
@@ -77,6 +95,7 @@ module.exports = function homeBlocks(userID, storeList) {
         },
       ],
     },
+
     {
       type: 'section',
       text: {
@@ -84,6 +103,7 @@ module.exports = function homeBlocks(userID, storeList) {
         text: mdList(rotaObj.staff),
       },
     },
+
     {
       type: 'divider',
     },
@@ -93,6 +113,7 @@ module.exports = function homeBlocks(userID, storeList) {
     {
       type: 'divider',
     },
+
     {
       type: 'section',
       text: {
@@ -100,6 +121,7 @@ module.exports = function homeBlocks(userID, storeList) {
         text: '*Helpful Tips:*',
       },
     },
+
     {
       type: 'section',
       text: {
@@ -107,6 +129,7 @@ module.exports = function homeBlocks(userID, storeList) {
         text: "I do _not_ control things like reminders, automated rotation scheduling, or delayed delivery of messages. However, because I'm a _bot_ and not a slash command, I play well with others! Here are some ways you can use the <@rota> bot with other Slack features and third party apps.",
       },
     },
+
     {
       type: 'section',
       text: {
@@ -114,6 +137,7 @@ module.exports = function homeBlocks(userID, storeList) {
         text: ':spiral_calendar_pad: *Scheduling Rotation Assignments*',
       },
     },
+
     {
       type: 'section',
       text: {
@@ -121,6 +145,7 @@ module.exports = function homeBlocks(userID, storeList) {
         text: "You can manage rotation assignments however you want. For example, you can set a recurring reminder with Slack's `/remind` to prompt a rotation's on-call user to assign the next person on staff at a regular interval. Like so:",
       },
     },
+
     {
       type: 'section',
       text: {
@@ -128,6 +153,7 @@ module.exports = function homeBlocks(userID, storeList) {
         text: '```/remind [#channel] "@rota "[rotation]" assign the next user in the rotation using `@rota "[rotation]" assign next`" every Monday at 9am```',
       },
     },
+
     {
       type: 'section',
       text: {
@@ -135,6 +161,7 @@ module.exports = function homeBlocks(userID, storeList) {
         text: "*Note:* You can't _directly_ remind me to do something. For instance: `/remind @rota \"[rotation]\" message in 5 minutes` will _not_ work because <@slackbot> isn't allowed to send reminders to <@rota> — another _bot user_. When using `/remind`, you need to send the reminder _to a channel_. This ensures the message is delivered to the rotation's _assigned human user_.",
       },
     },
+
     {
       type: 'section',
       text: {
@@ -142,6 +169,7 @@ module.exports = function homeBlocks(userID, storeList) {
         text: ':alarm_clock: *Scheduling Messages*',
       },
     },
+
     {
       type: 'section',
       text: {
@@ -149,6 +177,7 @@ module.exports = function homeBlocks(userID, storeList) {
         text: "You can schedule messages to be delivered later. This works with both the built-in `/remind` slash command (similar to above), and also with third party Slack apps like <https://www.gator.works/|Gator>. Just schedule the message _in a channel_ that I've been added to. For example:",
       },
     },
+
     {
       type: 'section',
       text: {
@@ -156,6 +185,7 @@ module.exports = function homeBlocks(userID, storeList) {
         text: '```/gator @rota "[rotation]" I need some help with task XYZ please!```',
       },
     },
+
     {
       type: 'section',
       text: {
@@ -169,6 +199,7 @@ module.exports = function homeBlocks(userID, storeList) {
     {
       type: 'divider',
     },
+
     {
       type: 'context',
       elements: [
@@ -186,4 +217,4 @@ module.exports = function homeBlocks(userID, storeList) {
     tipsBlocks,
     footerBlocks
   );
-};
+}

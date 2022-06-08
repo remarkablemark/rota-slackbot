@@ -115,4 +115,4 @@ const commandsBlocks = [
   },
 ];
 
-module.exports = commandsBlocks;
+export default commandsBlocks;

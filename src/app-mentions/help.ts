@@ -7,13 +7,13 @@
  *
  * Provides instructions on how to use Rota
  */
-module.exports = async function helpRotation(
-  app,
-  ec,
-  utils,
-  helpBlocks,
-  msgText,
-  errHandler
+export default async function helpRotation(
+  app: any,
+  ec: any,
+  utils: any,
+  helpBlocks: any,
+  msgText: any,
+  errHandler: any
 ) {
   try {
     await app.client.chat.postMessage({
@@ -24,4 +24,4 @@ module.exports = async function helpRotation(
   } catch (error) {
     errHandler(app, ec, utils, error, msgText);
   }
-};
+}

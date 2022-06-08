@@ -7,15 +7,15 @@
  *
  * Assigns a user to specified rotation
  */
-module.exports = async function assignRotation(
-  app,
-  event,
-  context,
-  ec,
-  utils,
-  store,
-  msgText,
-  errHandler
+export default async function assignRotation(
+  app: any,
+  event: any,
+  context: any,
+  ec: any,
+  utils: any,
+  store: any,
+  msgText: any,
+  errHandler: any
 ) {
   try {
     const pCmd = await utils.parseCmd('assign', event, context);
@@ -79,4 +79,4 @@ module.exports = async function assignRotation(
   } catch (error) {
     errHandler(app, ec, utils, error, msgText);
   }
-};
+}

@@ -1,10 +1,10 @@
-const introBlocks = require('./blocks-intro');
-const commandsBlocks = require('./blocks-commands');
+import commandsBlocks from './blocks-commands';
+import introBlocks from './blocks-intro';
 
 /**
  * BLOCKS: HELP
  */
-module.exports = function helpBlocks() {
+export default function helpBlocks() {
   const appHome = [
     {
       type: 'section',
@@ -19,4 +19,4 @@ module.exports = function helpBlocks() {
   ];
 
   return introBlocks.concat(appHome, commandsBlocks);
-};
+}
