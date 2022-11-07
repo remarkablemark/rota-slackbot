@@ -17,7 +17,7 @@
   "dependencies": {
     "@slack/bolt": "^3.12.2",
     "dotenv": "^16.0.3",
-    "mongoose": "^6.7.1"
+    "mongoose": "^6.7.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.2.0",
