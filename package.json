@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@slack/bolt": "^3.12.2",
-    "dotenv": "^16.3.0",
+    "dotenv": "^16.3.1",
     "mongoose": "^7.3.0"
   },
   "devDependencies": {
