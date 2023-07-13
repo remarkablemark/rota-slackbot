@@ -101,7 +101,7 @@ export function getUserID(usermention: string): string {
  */
 export function rotationInList(
   rotaname: string,
-  list: { name: string }[]
+  list: { name: string }[],
 ): boolean {
   if (list && list.length) {
     return list.filter((rotation) => rotation.name === rotaname).length > 0;
@@ -264,7 +264,7 @@ export function msgConfig(botToken: string, channelID: string, text: string) {
 export function msgConfigBlocks(
   botToken: string,
   channelID: string,
-  blocks: Record<string, string>
+  blocks: Record<string, string>,
 ) {
   return {
     token: botToken,
@@ -286,7 +286,7 @@ export function msgConfigEph(
   botToken: string,
   channelID: string,
   user: string,
-  text: string
+  text: string,
 ) {
   return {
     token: botToken,

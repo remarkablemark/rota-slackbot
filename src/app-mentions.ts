@@ -79,7 +79,7 @@ export default function app_mentions(app: any, store: any) {
             utils,
             store,
             msgText,
-            errHandler
+            errHandler,
           );
           break;
 
@@ -98,7 +98,7 @@ export default function app_mentions(app: any, store: any) {
             utils,
             store,
             msgText,
-            errHandler
+            errHandler,
           );
           break;
 
@@ -127,7 +127,7 @@ export default function app_mentions(app: any, store: any) {
             utils,
             store,
             msgText,
-            errHandler
+            errHandler,
           );
           break;
 
@@ -146,7 +146,7 @@ export default function app_mentions(app: any, store: any) {
             utils,
             store,
             msgText,
-            errHandler
+            errHandler,
           );
           break;
 
@@ -170,7 +170,7 @@ export default function app_mentions(app: any, store: any) {
             utils,
             store,
             msgText,
-            errHandler
+            errHandler,
           );
           break;
 
@@ -182,14 +182,14 @@ export default function app_mentions(app: any, store: any) {
               utils.msgConfig(
                 ec.botToken,
                 ec.channelID,
-                msgText.didntUnderstand(ec, msgText)
-              )
+                msgText.didntUnderstand(ec, msgText),
+              ),
             );
           } catch (error) {
             errHandler(app, ec, utils, error, msgText);
           }
           break;
       }
-    }
+    },
   );
 }

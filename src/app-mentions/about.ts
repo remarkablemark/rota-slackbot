@@ -15,7 +15,7 @@ export default async function aboutRotation(
   utils: any,
   store: any,
   msgText: any,
-  errHandler: any
+  errHandler: any,
 ) {
   try {
     const pCmd = await utils.parseCmd('about', event, context);
@@ -28,8 +28,8 @@ export default async function aboutRotation(
         utils.msgConfig(
           ec.botToken,
           ec.channelID,
-          msgText.aboutReport(rotation, rotationObj)
-        )
+          msgText.aboutReport(rotation, rotationObj),
+        ),
       );
       if (!!ec.sentByUserID && ec.sentByUserID !== 'USLACKBOT') {
         // Send ephemeral message with staff (to save notifications)
@@ -39,14 +39,18 @@ export default async function aboutRotation(
             ec.botToken,
             ec.channelID,
             ec.sentByUserID,
-            msgText.aboutStaffEph(rotation, rotationObj.staff)
-          )
+            msgText.aboutStaffEph(rotation, rotationObj.staff),
+          ),
         );
       }
     } else {
       // If rotation doesn't exist, send message saying nothing changed
       await app.client.chat.postMessage(
-        utils.msgConfig(ec.botToken, ec.channelID, msgText.aboutError(rotation))
+        utils.msgConfig(
+          ec.botToken,
+          ec.channelID,
+          msgText.aboutError(rotation),
+        ),
       );
     }
   } catch (error) {

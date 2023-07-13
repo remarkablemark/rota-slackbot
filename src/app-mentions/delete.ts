@@ -15,7 +15,7 @@ export default async function deleteRotation(
   utils: any,
   store: any,
   msgText: any,
-  errHandler: any
+  errHandler: any,
 ) {
   try {
     const pCmd = await utils.parseCmd('delete', event, context);
@@ -28,8 +28,8 @@ export default async function deleteRotation(
         utils.msgConfig(
           ec.botToken,
           ec.channelID,
-          msgText.deleteConfirm(rotation)
-        )
+          msgText.deleteConfirm(rotation),
+        ),
       );
     } else {
       // If rotation doesn't exist, send message saying nothing changed
@@ -37,8 +37,8 @@ export default async function deleteRotation(
         utils.msgConfig(
           ec.botToken,
           ec.channelID,
-          msgText.deleteError(rotation)
-        )
+          msgText.deleteError(rotation),
+        ),
       );
     }
   } catch (error) {

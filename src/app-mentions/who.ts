@@ -15,7 +15,7 @@ export default async function whoRotation(
   utils: any,
   store: any,
   msgText: any,
-  errHandler: any
+  errHandler: any,
 ) {
   try {
     const pCmd = await utils.parseCmd('who', event, context);
@@ -30,8 +30,8 @@ export default async function whoRotation(
           utils.msgConfig(
             ec.botToken,
             ec.channelID,
-            msgText.whoReport(rotationObj.assigned, rotation)
-          )
+            msgText.whoReport(rotationObj.assigned, rotation),
+          ),
         );
       } else {
         // If nobody is assigned
@@ -39,14 +39,14 @@ export default async function whoRotation(
           utils.msgConfig(
             ec.botToken,
             ec.channelID,
-            msgText.nobodyAssigned(rotation)
-          )
+            msgText.nobodyAssigned(rotation),
+          ),
         );
       }
     } else {
       // If rotation doesn't exist, send message saying nothing changed
       await app.client.chat.postMessage(
-        utils.msgConfig(ec.botToken, ec.channelID, msgText.whoError(rotation))
+        utils.msgConfig(ec.botToken, ec.channelID, msgText.whoError(rotation)),
       );
     }
   } catch (error) {

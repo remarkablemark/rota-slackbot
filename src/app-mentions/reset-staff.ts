@@ -15,7 +15,7 @@ export default async function resetStaffRotation(
   utils: any,
   store: any,
   msgText: any,
-  errHandler: any
+  errHandler: any,
 ) {
   try {
     const pCmd = await utils.parseCmd('reset staff', event, context);
@@ -29,8 +29,8 @@ export default async function resetStaffRotation(
         utils.msgConfig(
           ec.botToken,
           ec.channelID,
-          msgText.resetStaffConfirm(rotation)
-        )
+          msgText.resetStaffConfirm(rotation),
+        ),
       );
     } else {
       // If rotation doesn't exist, send message saying nothing changed
@@ -38,8 +38,8 @@ export default async function resetStaffRotation(
         utils.msgConfig(
           ec.botToken,
           ec.channelID,
-          msgText.resetStaffError(rotation)
-        )
+          msgText.resetStaffError(rotation),
+        ),
       );
     }
   } catch (error) {

@@ -15,7 +15,7 @@ export default async function unassignRotation(
   utils: any,
   store: any,
   msgText: any,
-  errHandler: any
+  errHandler: any,
 ) {
   try {
     const pCmd = await utils.parseCmd('unassign', event, context);
@@ -31,8 +31,8 @@ export default async function unassignRotation(
           utils.msgConfig(
             ec.botToken,
             ec.channelID,
-            msgText.unassignConfirm(rotation)
-          )
+            msgText.unassignConfirm(rotation),
+          ),
         );
       } else {
         // If nobody is assigned
@@ -40,8 +40,8 @@ export default async function unassignRotation(
           utils.msgConfig(
             ec.botToken,
             ec.channelID,
-            msgText.unassignNoAssignment(rotation)
-          )
+            msgText.unassignNoAssignment(rotation),
+          ),
         );
       }
     } else {
@@ -50,8 +50,8 @@ export default async function unassignRotation(
         utils.msgConfig(
           ec.botToken,
           ec.channelID,
-          msgText.unassignError(rotation)
-        )
+          msgText.unassignError(rotation),
+        ),
       );
     }
   } catch (error) {

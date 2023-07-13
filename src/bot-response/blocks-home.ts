@@ -215,6 +215,6 @@ export default function homeBlocks(userID: string, storeList: Rota[]) {
     homeBlocks,
     commandsBlocks,
     tipsBlocks,
-    footerBlocks
+    footerBlocks,
   );
 }

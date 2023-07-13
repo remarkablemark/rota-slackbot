@@ -6,10 +6,10 @@ export default async function handleError(
   ec: any,
   utils: any,
   error: any,
-  msgText: any
+  msgText: any,
 ): Promise<void> {
   console.error(error);
   await app.client.chat.postMessage(
-    utils.msgConfig(ec.botToken, ec.channelID, msgText.error(error))
+    utils.msgConfig(ec.botToken, ec.channelID, msgText.error(error)),
   );
 }

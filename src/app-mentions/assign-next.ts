@@ -15,7 +15,7 @@ export default async function assignNextRotation(
   utils: any,
   store: any,
   msgText: any,
-  errHandler: any
+  errHandler: any,
 ) {
   try {
     const pCmd = await utils.parseCmd('assign next', event, context);
@@ -54,8 +54,8 @@ export default async function assignNextRotation(
           utils.msgConfig(
             ec.botToken,
             ec.channelID,
-            msgText.assignConfirm(usermention, rotation)
-          )
+            msgText.assignConfirm(usermention, rotation),
+          ),
         );
         if (handoffMsg) {
           // There is a handoff message
@@ -74,9 +74,9 @@ export default async function assignNextRotation(
                 link,
                 ec.sentByUserID,
                 ec.channelID,
-                handoffMsg
-              )
-            )
+                handoffMsg,
+              ),
+            ),
           );
           if (!!ec.sentByUserID && ec.sentByUserID !== 'USLACKBOT') {
             // Send ephemeral message notifying assigner their handoff message was delivered via DM
@@ -85,8 +85,8 @@ export default async function assignNextRotation(
                 ec.botToken,
                 ec.channelID,
                 ec.sentByUserID,
-                msgText.assignHandoffConfirm(usermention, rotation)
-              )
+                msgText.assignHandoffConfirm(usermention, rotation),
+              ),
             );
           }
         }
@@ -96,8 +96,8 @@ export default async function assignNextRotation(
           utils.msgConfig(
             ec.botToken,
             ec.channelID,
-            msgText.assignNextError(rotation)
-          )
+            msgText.assignNextError(rotation),
+          ),
         );
       }
     } else {
@@ -106,8 +106,8 @@ export default async function assignNextRotation(
         utils.msgConfig(
           ec.botToken,
           ec.channelID,
-          msgText.assignError(rotation)
-        )
+          msgText.assignError(rotation),
+        ),
       );
     }
   } catch (error) {

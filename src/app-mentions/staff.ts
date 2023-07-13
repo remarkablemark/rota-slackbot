@@ -16,7 +16,7 @@ export default async function staffRotation(
   utils: any,
   store: any,
   msgText: any,
-  errHandler: any
+  errHandler: any,
 ) {
   try {
     const pCmd = await utils.parseCmd('staff', event, context);
@@ -28,7 +28,7 @@ export default async function staffRotation(
         // If staff array is empty, send an error message
         // This is unlikely to happen but possible if there's a really malformed command
         await app.client.chat.postMessage(
-          utils.msgConfig(ec.botToken, ec.channelID, msgText.staffEmpty())
+          utils.msgConfig(ec.botToken, ec.channelID, msgText.staffEmpty()),
         );
       } else {
         // Rotation exists and parameter staff list isn't empty
@@ -39,14 +39,18 @@ export default async function staffRotation(
           utils.msgConfig(
             ec.botToken,
             ec.channelID,
-            msgText.staffConfirm(rotation)
-          )
+            msgText.staffConfirm(rotation),
+          ),
         );
       }
     } else {
       // Rotation doesn't exist; prompt to create it first
       await app.client.chat.postMessage(
-        utils.msgConfig(ec.botToken, ec.channelID, msgText.staffError(rotation))
+        utils.msgConfig(
+          ec.botToken,
+          ec.channelID,
+          msgText.staffError(rotation),
+        ),
       );
     }
   } catch (error) {

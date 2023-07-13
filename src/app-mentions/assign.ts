@@ -15,7 +15,7 @@ export default async function assignRotation(
   utils: any,
   store: any,
   msgText: any,
-  errHandler: any
+  errHandler: any,
 ) {
   try {
     const pCmd = await utils.parseCmd('assign', event, context);
@@ -31,8 +31,8 @@ export default async function assignRotation(
         utils.msgConfig(
           ec.botToken,
           ec.channelID,
-          msgText.assignConfirm(usermention, rotation)
-        )
+          msgText.assignConfirm(usermention, rotation),
+        ),
       );
       if (handoffMsg) {
         // Send DM to newly assigned user notifying them of the handoff message
@@ -50,9 +50,9 @@ export default async function assignRotation(
               link,
               ec.sentByUserID,
               ec.channelID,
-              handoffMsg
-            )
-          )
+              handoffMsg,
+            ),
+          ),
         );
         if (!!ec.sentByUserID && ec.sentByUserID !== 'USLACKBOT') {
           // Send ephemeral message in channel notifying assigner their handoff message has been delivered via DM
@@ -61,8 +61,8 @@ export default async function assignRotation(
               ec.botToken,
               ec.channelID,
               ec.sentByUserID,
-              msgText.assignHandoffConfirm(usermention, rotation)
-            )
+              msgText.assignHandoffConfirm(usermention, rotation),
+            ),
           );
         }
       }
@@ -72,8 +72,8 @@ export default async function assignRotation(
         utils.msgConfig(
           ec.botToken,
           ec.channelID,
-          msgText.assignError(rotation)
-        )
+          msgText.assignError(rotation),
+        ),
       );
     }
   } catch (error) {

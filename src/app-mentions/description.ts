@@ -15,7 +15,7 @@ export default async function descriptionRotation(
   utils: any,
   store: any,
   msgText: any,
-  errHandler: any
+  errHandler: any,
 ) {
   try {
     const pCmd = await utils.parseCmd('description', event, context);
@@ -30,8 +30,8 @@ export default async function descriptionRotation(
           utils.msgConfig(
             ec.botToken,
             ec.channelID,
-            msgText.descEmpty(rotation)
-          )
+            msgText.descEmpty(rotation),
+          ),
         );
       } else {
         // Rotation exists and description isn't falsey
@@ -42,14 +42,14 @@ export default async function descriptionRotation(
           utils.msgConfig(
             ec.botToken,
             ec.channelID,
-            msgText.descConfirm(rotation, description)
-          )
+            msgText.descConfirm(rotation, description),
+          ),
         );
       }
     } else {
       // Rotation doesn't exist; prompt to create it first
       await app.client.chat.postMessage(
-        utils.msgConfig(ec.botToken, ec.channelID, msgText.descError(rotation))
+        utils.msgConfig(ec.botToken, ec.channelID, msgText.descError(rotation)),
       );
     }
   } catch (error) {

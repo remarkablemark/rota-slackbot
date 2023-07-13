@@ -28,7 +28,7 @@ export function newRotation(rotaname: string, description: string) {
       description: description,
       assigned: null,
       upsert: true,
-    }
+    },
   );
 }
 
@@ -44,7 +44,7 @@ export function updateDescription(rotaname: string, description: string) {
     { name: rotaname },
     {
       description,
-    }
+    },
   );
 }
 
@@ -59,7 +59,7 @@ export function saveStaff(rotaname: string, staffs: string[]) {
     { name: rotaname },
     {
       staff: staffs,
-    }
+    },
   );
 }
 
@@ -75,7 +75,7 @@ export function saveAssignment(rotaname: string, usermention: string) {
     { name: rotaname },
     {
       assigned: usermention,
-    }
+    },
   );
 }
 

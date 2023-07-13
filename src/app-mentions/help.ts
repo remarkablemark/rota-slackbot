@@ -13,7 +13,7 @@ export default async function helpRotation(
   utils: any,
   helpBlocks: any,
   msgText: any,
-  errHandler: any
+  errHandler: any,
 ) {
   try {
     await app.client.chat.postMessage({

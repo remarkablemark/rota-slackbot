@@ -12,7 +12,7 @@ export default async function listRotation(
   ec: any,
   utils: any,
   msgText: any,
-  errHandler: any
+  errHandler: any,
 ) {
   try {
     // If the store is not empty
@@ -21,13 +21,13 @@ export default async function listRotation(
         utils.msgConfig(
           ec.botToken,
           ec.channelID,
-          msgText.listReport(ec.rotaList)
-        )
+          msgText.listReport(ec.rotaList),
+        ),
       );
     } else {
       // If store is empty
       await app.client.chat.postMessage(
-        utils.msgConfig(ec.botToken, ec.channelID, msgText.listEmpty())
+        utils.msgConfig(ec.botToken, ec.channelID, msgText.listEmpty()),
       );
     }
   } catch (error) {

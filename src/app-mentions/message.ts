@@ -15,7 +15,7 @@ export default async function messageRotation(
   utils: any,
   store: any,
   msgText: any,
-  errHandler: any
+  errHandler: any,
 ) {
   try {
     const pCmd = await utils.parseCmd('message', event, context);
@@ -36,16 +36,16 @@ export default async function messageRotation(
           utils.msgConfig(
             ec.botToken,
             oncallUserDMChannel,
-            msgText.dmToAssigned(rotation, ec.sentByUserID, ec.channelID, link)
-          )
+            msgText.dmToAssigned(rotation, ec.sentByUserID, ec.channelID, link),
+          ),
         );
         // Send message to the channel where help was requested notifying that assigned user was contacted
         await app.client.chat.postMessage(
           utils.msgConfig(
             ec.botToken,
             ec.channelID,
-            msgText.confirmChannelMsg(rotation, ec.sentByUserID)
-          )
+            msgText.confirmChannelMsg(rotation, ec.sentByUserID),
+          ),
         );
         if (!!ec.sentByUserID && ec.sentByUserID !== 'USLACKBOT') {
           // Send ephemeral message (only visible to sender) telling them what to do if urgent
@@ -55,8 +55,8 @@ export default async function messageRotation(
               ec.botToken,
               ec.channelID,
               ec.sentByUserID,
-              msgText.confirmEphemeralMsg(rotation)
-            )
+              msgText.confirmEphemeralMsg(rotation),
+            ),
           );
         }
       } else {
@@ -65,14 +65,14 @@ export default async function messageRotation(
           utils.msgConfig(
             ec.botToken,
             ec.channelID,
-            msgText.nobodyAssigned(rotation)
-          )
+            msgText.nobodyAssigned(rotation),
+          ),
         );
       }
     } else {
       // Rotation doesn't exist
       await app.client.chat.postMessage(
-        utils.msgConfig(ec.botToken, ec.channelID, msgText.msgError(rotation))
+        utils.msgConfig(ec.botToken, ec.channelID, msgText.msgError(rotation)),
       );
     }
   } catch (error) {
