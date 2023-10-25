@@ -20,7 +20,7 @@
     "mongoose": "^7.6.3"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.6.6",
+    "@commitlint/cli": "^18.1.0",
     "@commitlint/config-conventional": "^18.1.0",
     "@typescript-eslint/eslint-plugin": "^6.9.0",
     "@typescript-eslint/parser": "^6.9.0",
