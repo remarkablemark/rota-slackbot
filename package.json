@@ -30,7 +30,7 @@
     "husky": "^8.0.3",
     "nodemon": "^3.0.2",
     "pinst": "^3.0.0",
-    "prettier": "^3.1.0",
+    "prettier": "^3.1.1",
     "typescript": "^5.3.3"
   },
   "engines": {
