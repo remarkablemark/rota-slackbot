@@ -15,7 +15,7 @@
     "tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@slack/bolt": "^3.13.2",
+    "@slack/bolt": "^3.19.0",
     "dotenv": "^16.4.5",
     "mongoose": "^7.6.3"
   },
